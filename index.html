@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="SpendWise — understand your everyday money."
+    />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <title>SpendWise · Every little thing adds up</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="spendwise.css" />
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to overview</a>
+    <div class="shell">
+      <aside>
+        <a class="brand" href="./">SpendWise<span>®</span></a>
+        <div class="aside-art" aria-hidden="true">
+          <span>+</span><span>−</span><span>=</span>
+        </div>
+        <p>Know your money.<br />Own your next move.</p>
+        <span class="eyebrow">Personal ledger / INR</span>
+      </aside>
+      <div class="workspace">
+        <header>
+          <span class="eyebrow">The everyday money journal</span
+          ><button id="add" class="primary">+ Add transaction</button>
+        </header>
+        <main id="main">
+          <section class="hero">
+            <div>
+              <div class="eyebrow">A little clarity goes a long way</div>
+              <h1>Every little thing<br /><em>adds up.</em></h1>
+              <p>
+                Your income, your spending, your bigger picture. All in one
+                quiet corner.
+              </p>
+            </div>
+          </section>
+          <div id="storage-warning" class="notice" role="status"></div>
+          <section class="stats" aria-label="All-time totals">
+            <div class="stat featured">
+              <span class="muted">All-time balance</span
+              ><strong id="balance">₹0</strong>
+            </div>
+            <div class="stat">
+              <span class="muted">Total income ↙</span
+              ><strong id="income">₹0</strong>
+            </div>
+            <div class="stat">
+              <span class="muted">Total expenses ↗</span
+              ><strong id="expenses">₹0</strong>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="row between">
+              <h2>The ledger</h2>
+              <span class="muted" id="result-count" aria-live="polite"></span>
+            </div>
+            <div class="toolbar">
+              <label
+                >Search<input
+                  id="search"
+                  type="search"
+                  placeholder="Description or category…" /></label
+              ><label
+                >Type<select id="type-filter" aria-label="Filter type">
+                  <option value="all">All types</option>
+                  <option value="income">Income</option>
+                  <option value="expense">Expense</option>
+                </select></label
+              ><label
+                >Category<select
+                  id="category-filter"
+                  aria-label="Filter category"
+                ></select></label
+              ><label>Month<input id="month" type="month" /></label
+              ><button id="clear">Reset filters</button>
+            </div>
+            <p class="muted" id="filtered-summary"></p>
+            <div id="transactions" class="list"></div>
+          </section>
+          <section class="charts">
+            <div class="panel">
+              <div class="row between">
+                <h2>Where it goes</h2>
+                <span class="eyebrow">Filtered expenses</span>
+              </div>
+              <div id="categories-chart"></div>
+            </div>
+            <div class="panel">
+              <div class="row between">
+                <h2>Six-month rhythm</h2>
+                <span class="eyebrow">All transactions</span>
+              </div>
+              <div id="trend-chart"></div>
+              <p class="chart-key">
+                <span>■ Income</span><span>▧ Expenses</span>
+              </p>
+              <div id="trend-table"></div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+    <dialog id="transaction-dialog">
+      <form id="transaction-form">
+        <div class="dialog-head">
+          <h2 id="dialog-title">Add transaction</h2>
+          <button type="button" data-close aria-label="Close dialog">×</button>
+        </div>
+        <input name="id" type="hidden" />
+        <div class="formgrid">
+          <label
+            >Type<select name="type" aria-label="Transaction type">
+              <option value="expense">Expense</option>
+              <option value="income">Income</option>
+            </select></label
+          ><label
+            >Amount (INR)<input
+              name="amount"
+              type="number"
+              min="0.01"
+              max="10000000"
+              step="0.01"
+              required
+              placeholder="0.00"
+          /></label>
+        </div>
+        <label
+          >Description<input
+            name="description"
+            required
+            maxlength="120"
+            placeholder="What was it for?"
+        /></label>
+        <div class="formgrid">
+          <label
+            >Category<select
+              name="category"
+              aria-label="Transaction category"
+            ></select></label
+          ><label>Date<input name="date" type="date" required /></label>
+        </div>
+        <div class="row">
+          <button type="submit" class="primary">Save transaction</button
+          ><button type="button" data-close>Cancel</button>
+        </div>
+      </form>
+    </dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
